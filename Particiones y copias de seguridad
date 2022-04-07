@@ -1,0 +1,103 @@
+#Particiones de discos y copias de seguridad
+| Trabajo | Páginas |
+ | ----------- |:------------:|
+ | Creación segundo disco durp y como entrar en diskpart | 1-3 |
+ | Particiones de disco utilizando herramientas por comandos diskpart| 4-9|
+ | Particiones con la herramienta de administrador de discos | 5-16 |
+##Creación segundo disco duro y como entrar en diskpart
+1. Seleccionamos **configuracion**
+![Imagen1](./Imagenes/Imagen1.png)
+2. Dentro de la configuración seleccionamos el **almacenamiento** y seleccionamos crear **una imagen de disco.**
+![Imagen2](./Imagenes/Imagen2.png)
+3.	Seleccionamos el tipo de archivo de disco duro.
+![Imagen3](./Imagenes/Imagen3.png)
+4.	Elegimos el tipo de almacenamiento.
+![Imagen4](./Imagenes/Imagen4.png)
+5. Y finalmente elegimos el tamaño del disco duro.
+![Imagen5](./Imagenes/Imagen5.png)
+6.	Abrimos el terminal pulsando las teclas **Windows+R** y escribimos _CMD_ y aceptamos.
+![Imagen6](./Imagenes/Imagen6.png)
+7.	En el comando escribimos _Diskpart_.
+![Imagen7](./Imagenes/Imagen7.png)
+8.	Una vez escrito diskpart ya estamos dentro del almacenamiento del sistema.
+![Imagen8](./Imagenes/Imagen8.png)
+##1. Particiones de disco utilizando herramientas por comandos diskpart
+
+####¿Qué número tiene asignado cada uno?
+* En el comando escribimos _SELECT DISK_  para seleccionar el disco duro que vayamos a usar. Después escribimos _LIST DISK_  y nos aparecerán los discos duros que tenemos en el sistema. Los discos tienen asignados los números **0 y 1.**
+![Imagen9](./Imagenes/Imagen9.png)
+
+####Elimina todas las particiones creadas en el segundo disco
+* Escribimos _LIST PARTITION_ y nos aparecerá las particiones que tenemos en el disco, luego escribimos _SELECT PARTITION_ y el número que sea (En este caso el 1 porque es la única partición que existe). Y para Borrar la partición escribimos **CLEAN** y ya estará eliminada.
+![Imagen10](./Imagenes/Imagen10.png)
+
+
+####Crea dos particiones una primaria (5GB) y una extendida (5GB) con dos unidades lógicas, cada una de 1 (GB).
+* Para crear una partición primaria escribimos _CREATE PARTITION PRIMARY_ SIZE y escribimos el tamaño que queramos en MB (En este caso para crear una partición de 5GB escribimos 5000, 5GB=5000MB). Luego para crear una partición extendida escribimos **CREATE PARTITION EXTENDED SIZE** y el tamaño en MB que queramos crear.
+![Imagen11](./Imagenes/Imagen11.png)
+
+
+####Asígnale una letra a cada una
+* Para asignar una letra seleccionamos la partición escribiendo **SELECT PARTITION** y el número y después cuando ya tengamos seleccionada la partición escribimos _ASSIGN LETTER_ y la letra que queramos asignarle.
+![Imagen12](./Imagenes/Imagen12.png)
+
+
+####Visualiza la información relativa a cada una de las particiones con cada herramienta. Pega la captura de pantalla correspondiente.
+* Escribimos _detail disk_ y después list partition para que nos salga toda la información de cada uno de los discos. Para la información de las particiones escribimos **detail partition**.
+![Imagen13](./Imagenes/Imagen13.png)
+![Imagen14](./Imagenes/Imagen14.png)
+
+
+####Borra la segunda unidad lógica y redimensiona la primera unidad lógica para que ocupe 3GB.
+* Para borrar una unidad lógica seleccionamos la partición escribiendo _SELECT PARTITION_ y una vez seleccionada la partición escribimos _DELETE PARTITION_ para eliminarla.
+![Imagen15](./Imagenes/Imagen15.png)
+
+* Para extender una partición seleccionamos la partición escribiendo **SELECT PARTITION**, una vez seleccionada escribimos _EXTEND SIZE_ y el número que queramos asignarles en MB
+![Imagen16](./Imagenes/Imagen16.png)
+
+####Aumenta de tamaño la partición primaria. El resultado debe ser el siguiente: la primaria debe ocupar 7 GB y la unidad lógica 3 GB
+1. Para aumentar de tamaño primero nos descargamos la aplicación [MiniTool Partition Wizard 12.6](https://www.partitionwizard.com/download-free-from-cnet.html?p=pw&e=pw-free&r=free-partition-manager)
+![Imagen17](./Imagenes/Imagen17.png)
+2. Una vez descargada nos saldrán todos nuestros discos, clicamos sobre el disco duro de 5GB y seleccionamos formatear para después poder redimensionarla.
+![Imagen18](./Imagenes/Imagen18.png)
+3. Una vez formateado el disco duro seleccionamos **Extender Partición** y seleccionamos los MB necesarios.
+![Imagen19](./Imagenes/Imagen19.png)
+4.	Cuando lo extendamos, lo aplicamos y ya nos saldrá el disco duro extendido
+![Imagen20](./Imagenes/Imagen20.png)
+5.	Para comprobarlo diskpart, escribimos _list partition_ y ya nos saldrá los discos duros extendidos.
+![Imagen21](./Imagenes/Imagen21.png)
+
+***
+##2. Particiones con la herramienta de administrador de discos
+
+####Haz una captura de pantalla de tus discos desde el administrador de discos
+* Escribimos disco para acceder directamente al administrador de discos.
+![Imagen22](./Imagenes/Imagen22.png)
+* Al entrar podremos ver todos nuestros discos.
+![Imagen23](./Imagenes/Imagen23.png)
+
+####Crea dos particiones de igual tamaño, formateados en ntfs (captura)
+1.	Hacemos clic derecho sobre el disco y seleccionamos **Nuevo volumen simple**.
+![Imagen24](./Imagenes/Imagen24.png)
+2.	Elegimos el tamaño del disco duro.
+![Imagen25](./Imagenes/Imagen25.png)
+3.	Le asignamos una letra.
+![Imagen26](./Imagenes/Imagen26.png)
+4.	Elegimos el tipo de formateo.
+![Imagen27](./Imagenes/Imagen27.png)
+5.	Le damos a finalizar y ya tendremos el disco divido en dos particiones.
+![Imagen28](./Imagenes/Imagen28.png)
+
+####Cambia el tamaño de las particiones a una de 6GB y otra de 4GB
+* Para reducir el tamaño, seleccionamos una partición, haciendo clic derecho y pulsamos Reducir volumen.
+![Imagen29](./Imagenes/Imagen29.png)
+* Escribimos en MB la cantidad que queramos reducir.
+![Imagen30](./Imagenes/Imagen30.png)
+* Para aumentar el tamaño de una partición, seleccionamos _Extender Volumen_. Una vez seleccionado el tamaño nos saldrá el disco extendido.
+![Imagen31](./Imagenes/Imagen31.png)
+
+#Webgrafía
+
+>[Microsoft](http://technet.microsoft.com/es-es/library/cc770877%28v=ws.10%29.aspx)
+>[Youtube](https://www.youtube.com/watch?v=KTsIF54ngWY)
+>[Profesional review](https://www.profesionalreview.com/2018/11/11/administrador-disco-duro-windows-10/)
